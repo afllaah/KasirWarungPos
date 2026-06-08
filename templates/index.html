@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Kasir Warung</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+KASIR WARUNG
+</div>
+
+<div class="container">
+
+<img src="{{ url_for('static', filename='logo.png') }}"
+class="logo">
+
+<form method="POST">
+
+<div class="grid">
+
+{% for item in menu %}
+
+<div class="card">
+
+<h2>{{ item.nama }}</h2>
+
+<h3>Rp {{ item.harga }}</h3>
+
+<input type="hidden"
+name="nama"
+value="{{ item.nama }}">
+
+<input type="hidden"
+name="harga"
+value="{{ item.harga }}">
+
+<input type="number"
+name="qty"
+placeholder="Jumlah">
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="total">
+
+<h2>Total Pembayaran</h2>
+
+<input type="number"
+name="bayar"
+placeholder="Uang Bayar">
+
+<button type="submit">
+BAYAR
+</button>
+
+</div>
+
+</form>
+
+<br>
+
+<a href="/riwayat">
+<button>
+RIWAYAT TRANSAKSI
+</button>
+</a>
+
+<a href="/logout">
+<button class="logout">
+LOGOUT
+</button>
+</a>
+
+</div>
+
+</body>
+</html>

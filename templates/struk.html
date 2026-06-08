@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Struk</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+STRUK PEMBAYARAN 
+</div>
+
+<div class="container">
+
+<div class="total">
+
+<img src="{{ url_for('static', filename='logo.png') }}"
+class="logo">
+
+{% for item in items %}
+
+<p>
+{{ item.nama }}
+x{{ item.qty }}
+=
+Rp {{ item.subtotal }}
+</p>
+
+{% endfor %}
+
+<hr>
+
+<h2>Total : Rp {{ total }}</h2>
+
+<h2>Bayar : Rp {{ bayar }}</h2>
+
+<h2>Kembalian : Rp {{ kembalian }}</h2>
+
+<center>
+
+<img src="{{ url_for('static', filename='qr.png') }}"
+width="200">
+
+</center>
+
+<br>
+
+<button onclick="window.print()">
+CETAK STRUK
+</button>
+
+<br><br>
+
+<a href="/">
+<button>
+KEMBALI
+</button>
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

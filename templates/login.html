@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Login Kasir</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+LOGIN KASIR
+</div>
+
+<div class="container">
+
+<img src="{{ url_for('static', filename='logo.png') }}"
+class="logo">
+
+<form method="POST" class="total">
+
+<input type="text"
+name="username"
+placeholder="Username">
+
+<input type="password"
+name="password"
+placeholder="Password">
+
+<button type="submit">
+LOGIN
+</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
