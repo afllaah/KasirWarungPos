@@ -1,70 +1,69 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>Struk</title>
+    <title>Struk</title>
 
-<link rel="stylesheet"
-href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
 <body>
 
-<div class="header">
-STRUK PEMBAYARAN 
-</div>
+    <div class="header">
+        STRUK PEMBAYARAN
+    </div>
 
-<div class="container">
+    <div class="container">
 
-<div class="total">
+        <div class="total">
 
-<img src="{{ url_for('static', filename='logo.png') }}"
-class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
 
-{% for item in items %}
+            {% for item in items %}
 
-<p>
-{{ item.nama }}
-x{{ item.qty }}
-=
-Rp {{ item.subtotal }}
-</p>
+            <p>
+                {{ item.nama }}
+                x{{ item.qty }}
+                =
+                Rp {{ item.subtotal }}
+            </p>
 
-{% endfor %}
+            {% endfor %}
 
-<hr>
+            <hr>
 
-<h2>Total : Rp {{ total }}</h2>
+            <h2>Total : Rp {{ total }}</h2>
 
-<h2>Bayar : Rp {{ bayar }}</h2>
+            <h2>Bayar : Rp {{ bayar }}</h2>
 
-<h2>Kembalian : Rp {{ kembalian }}</h2>
+            <h2>Kembalian : Rp {{ kembalian }}</h2>
 
-<center>
+            <center>
 
-<img src="{{ url_for('static', filename='qr.png') }}"
-width="200">
+                <img src="{{ url_for('static', filename='qr.png') }}" width="200">
 
-</center>
+            </center>
 
-<br>
+            <br>
 
-<button onclick="window.print()">
-CETAK STRUK
-</button>
+            <button onclick="window.print()">
+                CETAK STRUK
+            </button>
 
-<br><br>
+            <br><br>
 
-<a href="/">
-<button>
-KEMBALI
-</button>
-</a>
+            <a href="/kasir">
+                <button>
+                    KEMBALI
+                </button>
+            </a>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </body>
+
 </html>

@@ -1,57 +1,58 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>Riwayat</title>
+    <title>Riwayat</title>
 
-<link rel="stylesheet"
-href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
 <body>
 
-<div class="header">
-RIWAYAT TRANSAKSI
-</div>
+    <div class="header">
+        RIWAYAT TRANSAKSI
+    </div>
 
-<div class="container">
+    <div class="container">
 
-<div class="total">
+        <div class="total">
 
-<table width="100%" border="1" cellpadding="10">
+            <table width="100%" border="1" cellpadding="10">
 
-<tr>
-<th>ID</th>
-<th>Tanggal</th>
-<th>Total</th>
-</tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Tanggal</th>
+                    <th>Total</th>
+                </tr>
 
-{% for row in data %}
+                {% for row in data %}
 
-<tr>
+                <tr>
 
-<td>{{ row[0] }}</td>
-<td>{{ row[1] }}</td>
-<td>Rp {{ row[2] }}</td>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>Rp {{ row[2] }}</td>
 
-</tr>
+                </tr>
 
-{% endfor %}
+                {% endfor %}
 
-</table>
+            </table>
 
-<br>
+            <br>
 
-<a href="/">
-<button>
-KEMBALI
-</button>
-</a>
+            <a href="/kasir">
+                <button>
+                    KEMBALI
+                </button>
+            </a>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </body>
+
 </html>

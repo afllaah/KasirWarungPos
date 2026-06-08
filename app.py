@@ -53,7 +53,7 @@ init_db()
 create_admin()
 
 # ================= LOGIN =================
-@app.route('/login', methods=['GET','POST'])
+@app.route('/', methods=['GET','POST'])
 def login():
 
     if request.method == 'POST':
@@ -81,7 +81,7 @@ def login():
             return render_template('login.html', error="Password salah!")
 
         session['user'] = username
-        return redirect('/')
+        return redirect('/kasir')
 
     return render_template('login.html')
 
@@ -137,7 +137,7 @@ def forgot_password():
 def logout():
 
     session.clear()
-    return redirect('/login')
+    return redirect('/')
 
 # ================= MENU =================
 MENU = [
@@ -182,11 +182,11 @@ MENU = [
 ]
 
 # ================= HALAMAN KASIR =================
-@app.route('/', methods=['GET','POST'])
+@app.route('/kasir', methods=['GET','POST'])
 def index():
 
     if 'user' not in session:
-        return redirect('/login')
+        return redirect('/')
 
     if request.method == 'POST':
 
