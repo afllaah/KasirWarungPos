@@ -58,27 +58,79 @@ def login():
 
     if request.method == 'POST':
 
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
+
+        if not username or not password:
+            return render_template('login.html', error="Username dan password harus diisi!")
 
         conn = sqlite3.connect('database.db')
         c = conn.cursor()
 
         user = c.execute(
-            "SELECT * FROM user WHERE username=? AND password=?",
-            (username,password)
+            "SELECT * FROM user WHERE username=?",
+            (username,)
         ).fetchone()
 
         conn.close()
 
-        if user:
-            session['user'] = username
-            return redirect('/')
+        if not user:
+            return render_template('login.html', error="Username tidak ditemukan!")
 
-        else:
-            return "Login gagal"
+        if user[2] != password:
+            return render_template('login.html', error="Password salah!")
+
+        session['user'] = username
+        return redirect('/')
 
     return render_template('login.html')
+
+# ================= LUPA PASSWORD =================
+@app.route('/forgot-password', methods=['GET', 'POST'])
+def forgot_password():
+
+    if request.method == 'POST':
+
+        username = request.form.get('username', '').strip()
+        new_password = request.form.get('new_password', '')
+        confirm_password = request.form.get('confirm_password', '')
+
+        if not username or not new_password or not confirm_password:
+            return render_template('forgot_password.html', error="Semua field harus diisi!")
+
+        if len(new_password) < 4:
+            return render_template('forgot_password.html', error="Password baru minimal harus 4 karakter!")
+
+        if new_password != confirm_password:
+            return render_template('forgot_password.html', error="Konfirmasi password tidak cocok!")
+
+        conn = sqlite3.connect('database.db')
+        c = conn.cursor()
+
+        user = c.execute(
+            "SELECT * FROM user WHERE username=?",
+            (username,)
+        ).fetchone()
+
+        if not user:
+            conn.close()
+            return render_template('forgot_password.html', error="Username tidak ditemukan!")
+
+        if user[2] == new_password:
+            conn.close()
+            return render_template('forgot_password.html', error="Password baru tidak boleh sama dengan password lama!")
+
+        c.execute(
+            "UPDATE user SET password=? WHERE username=?",
+            (new_password, username)
+        )
+
+        conn.commit()
+        conn.close()
+
+        return render_template('forgot_password.html', success="Password berhasil diubah!")
+
+    return render_template('forgot_password.html')
 
 # ================= LOGOUT =================
 @app.route('/logout')
